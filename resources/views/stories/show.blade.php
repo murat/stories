@@ -28,29 +28,56 @@
       </div>
     @endif
 
-    <div class="col-md-12">
-      <form action="/stories/{{$story->slug}}/comments" method="post" class="ajax-form form-horizontal">
-        {{csrf_field()}}
-        <input type="hidden" name="story_id" value="{{$story->id}}">
-        <input type="hidden" name="email" value="sdfsdf@gmail.com">
+    <div class="row" id="new-comment">
+      <div class="col-md-12 comments">
+        <div class="comment-wrap">
+          <div class="comment-block">
 
-        <div class="form-group">
-          <textarea class="form-control" name="comment"></textarea>
+            <form action="/stories/{{$story->slug}}/comments" method="post" class="ajax-form form-horizontal">
+              {{csrf_field()}}
+              <input type="hidden" name="story_id" value="{{$story->id}}">
+
+              <div class="form-group">
+                <input type="text" name="email" placeholder="E mail" />
+              </div>
+              <div class="form-group">
+                <textarea name="comment" placeholder="Comment..."></textarea>
+              </div>
+              <div class="bottom-comment">
+                <ul class="comment-actions">
+                  <button class="pull-right btn btn-link" type="submit">
+                    Save
+                  </button>
+                </ul>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="form-group">
-          <button class="pull-right btn btn-success" type="submit">
-            Save
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
 
-    <ul class="list-unstyled">
-      @foreach($story->comments() as $comment)
-        <li>
-          {{$story->comment}}
-        </li>
-      @endforeach
-    </ul>
+    <div class="row">
+      <div class="comments col-md-12">
+        @foreach($story->comments as $comment)
+          <div class="comment-wrap">
+            <div class="photo">
+              <div class="avatar" style="background-image: url('http://s.gravatar.com/avatar/{{md5($comment->email)}}')"></div>
+            </div>
+            <div class="comment-block">
+              <p class="comment-text">
+                {!! nl2br($comment->comment) !!}
+              </p>
+              <div class="bottom-comment">
+                <div class="comment-date">{{$comment->created_at->diffForHumans()}}</div>
+                <ul class="comment-actions">
+                  <li class="reply"><a href="#new-comment" data-reply-id="{{$comment->id}}">Reply</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
+
   </div>
 @endsection

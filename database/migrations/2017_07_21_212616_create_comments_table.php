@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
 
             $table->integer('story_id')->unsigned();
-            $table->string('email', 128)->unique();
+            $table->string('email');
             $table->text('comment')->nullable()->default(null);
 
             $table->timestamps();
