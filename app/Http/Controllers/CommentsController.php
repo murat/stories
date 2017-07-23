@@ -37,9 +37,9 @@ class CommentsController extends Controller
     public function store($id, Request $request)
     {
         if (is_numeric($id)) {
-            $story = Story::find($id)->with('comments');
+            $story = Story::find($id);
         } else {
-            $story = Story::with('comments')->where('slug', '=', $id)->first();
+            $story = Story::where('slug', '=', $id)->first();
         }
 
         $data = $request->all();

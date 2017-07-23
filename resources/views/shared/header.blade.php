@@ -19,7 +19,11 @@
         <li><a href="/stories/create">/new story</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            /user <span class="caret"></span>
+            @if(auth()->user())
+              /{{str_slug(auth()->user()->name)}} <span class="caret"></span>
+            @else
+              /user <span class="caret"></span>
+            @endif
           </a>
           <ul class="dropdown-menu">
             @if(auth()->user())
