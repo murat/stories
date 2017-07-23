@@ -1,5 +1,7 @@
 # Stories
 
+![https://travis-ci.org/muratbsts/stories.svg?branch=master](https://travis-ci.org/muratbsts/stories.svg?branch=master)
+
 Story sharing platform made with Laravel 5.4
 
 ## Contributors
