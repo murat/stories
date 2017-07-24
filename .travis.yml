@@ -1,20 +1,24 @@
 language: php
 
 php:
+  - 5.6
   - 7.0
 
-sudo: false
-
-cache:
-  directories:
-    - $HOME/.composer/cache
-
 before_script:
+  - mkdir bootstrap/cache
+  - mkdir storage
+  - mkdir storage/app
+  - mkdir storage/framework
+  - mkdir storage/framework/sessions
+  - mkdir storage/framework/cache
+  - mkdir storage/framework/views
+  - chmod 777 -R storage
   - cp .env.travis .env
   - mysql -e 'create database homestead_test;'
   - composer self-update
   - composer install --no-interaction
+  - php artisan key:generate
+  - php artisan migrate
 
 script:
-  - php artisan key:generate
   - vendor/bin/phpunit
