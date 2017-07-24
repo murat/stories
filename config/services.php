@@ -36,9 +36,9 @@ return [
     ],
 
     'github' => [
-        'client_id' => 'ff870205a40aa4ebd325',
-        'client_secret' => '224be14acb92c3fc277e672541dc846c4afe3c16',
-        'redirect' => 'http://stories.dev/login/github/callback',
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_CALLBACK'),
     ],
 
 ];
