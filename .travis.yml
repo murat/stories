@@ -2,7 +2,6 @@ language: php
 
 php:
   - 7.0
-
 before_script:
   - mkdir -p bootstrap/cache
   - mkdir -p storage
@@ -18,12 +17,5 @@ before_script:
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan migrate
-
 script:
   - vendor/bin/phpunit
-
-deploy:
-  provider: heroku
-  api_key:
-    secure: ARskO6ve19kufcmjMm0PxZO7ikuGjz624Dcf+bXuOrmEKuQy+pkoytO7RnhMkRlJOdQLrqsS7MxbCVsZfa5+C5VY+z6k034rDKzwdXHYSeIS/kZP5HI7PH4/hoVfNJVzN+b64M6giDxtLRk7E97GwcDIOFOZBQyMDjB0tZPBL5dKft5jZGX2KwFrT/Fc7ot5mzM6Y/c70SdItP68PQiBk9jkgDCGnQLQ2Ca1iArJ9h2cV9ASym3bfc3hN/2WRngfjSWA3bpVOC2FDdq3B+yEH3vma5Xr7y3QJ13QQ0300fyvBayXLBkAQTJG6oI38BaaLm5jotNbY2RFjyNbnwetRxkGApegIGMi9ah7ODhLZfC5QGxPF5hu4+znjsyK2ESJrSNmrhmgNvHa5os3va6a8rV1ghyXfX/ioe+SqQunVx6dFPR0Kq88irsl9+dNaLS8VXW2nmrQYAjFERpLif6z3AwfMsiGbGaFjsW+wZZhNMFYFR4gkZh8sKTzttohTKYC6OCgtZnxVISn0k4uEaJHEfu9ZLpN+cWDOYtdl9eycsYsscaHOqbtSMQkZOuf4UFn3A/g05oQrA++JS205nD+pHyuNoBs3fsb/rqHMLduq0Q5wsONphenMd6trWwgfXVtbe88WKqGyFiEuPFbXSY71vc//aGjZQnrSIjQnf5ynu0=
-  app: secret-wave-38846
