@@ -27,6 +27,11 @@
       <input type="text" name="url" id="url" class="form-control" value="{{isset($story)?$story->url:''}}" />
     </div>
     <div class="form-group">
+      <span class="checkbox-inline">
+        <label>
+          <input type="checkbox" name="user_id" value="0" /> Post anonymously
+        </label>
+      </span>
       <button type="submit" class="btn btn-success pull-right">Save</button>
     </div>
   </form>

@@ -5,8 +5,10 @@
     <h3>{{$story->title}}</h3>
 
     <div class="info">
-      {{--{{'@author :'}} {{$story->}}--}}
-      {{$story->created_at->diffForHumans()}}
+      Posted {{$story->created_at->diffForHumans()}}
+      @if($story->user_id)
+        by <a href="/user/{{$story->user->slug}}">{{$story->user->name}}</a>
+      @endif
     </div>
 
     <p>
@@ -37,9 +39,14 @@
               {{csrf_field()}}
               <input type="hidden" name="story_id" value="{{$story->id}}">
 
-              <div class="form-group">
-                <input type="text" name="email" placeholder="E mail" />
-              </div>
+              @if(!auth()->user())
+                <div class="form-group">
+                  <input type="text" name="email" placeholder="E mail" />
+                </div>
+              @else
+                <input type="hidden" name="email" value="{{auth()->user()->email}}" />
+                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+              @endif
               <div class="form-group">
                 <textarea name="comment" placeholder="Comment..."></textarea>
               </div>

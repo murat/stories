@@ -2,27 +2,34 @@
 
 namespace App;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 
 class Story extends Model
 {
+    use HasSlug;
+
     protected $table = "stories";
     protected $guarded = ["id"];
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
+    }
 
     public function comments()
     {
         return $this->hasMany('App\Comment');
     }
 
-    /**
-     * Set the story title
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setTitleAttribute($value)
+    public function user()
     {
-        $this->attributes['title'] = $value;
-        $this->attributes['slug'] = str_slug($value);
+        return $this->belongsTo('App\User');
     }
 }

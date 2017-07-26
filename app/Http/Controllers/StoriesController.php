@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoryRequest;
 use Illuminate\Http\Request;
+use Auth;
 use App\Story;
 use App\Comment;
 
@@ -43,13 +44,18 @@ class StoriesController extends Controller
     {
         $data = $request->all();
 
+        if (Auth::check() && !array_key_exists('user_id', $data)) {
+            $data['user_id'] = Auth::user()->id;
+        }
+
         try {
             Story::create($data);
 
             return redirect()->action('StoriesController@index')
                              ->with('success', 'Story created!');
         } catch (\Exception $e) {
-            return redirect('/stories/create')->with('error', 'An error occurred: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred: ' . $e->getMessage())
+                ->withInput();
         }
     }
 
