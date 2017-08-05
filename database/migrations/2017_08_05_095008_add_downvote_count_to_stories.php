@@ -14,7 +14,7 @@ class AddDownvoteCountToStories extends Migration
     public function up()
     {
         Schema::table('stories', function (Blueprint $table) {
-            $table->integer('downvote_count')->after('upvote_count');
+            $table->integer('downvote_count')->default(0)->after('upvote_count');
         });
     }
 
