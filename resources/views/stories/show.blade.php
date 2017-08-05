@@ -2,7 +2,11 @@
 
 @section('content')
   <div class="container">
-    <h3>{{$story->title}}</h3>
+    <h3>
+      <a href="{{$story->url ? $story->url : "/stories/{$story->slug}"}}" @if($story->url) target="_blank" @endif>
+        {{$story->title}}
+      </a>
+    </h3>
 
     <div class="info">
       Posted {{$story->created_at->diffForHumans()}}
@@ -15,8 +19,24 @@
       {!! nl2br($story->body) !!}
     </p>
 
+    <div class="btn-group">
+
+      <a href="#" style="pointer-events: none;" class="btn btn-default">{{$story->upvote_count}}</a>
+
+      <a href="#upvote" class="btn btn-success">
+        <span class="caret" style="transform: rotate(180deg)"></span>
+        upvote
+      </a>
+      <a href="#downvote" class="btn btn-danger">
+        <span class="caret"></span>
+        downvote
+      </a>
+
+    </div>
+
     <hr />
-    <h5 style="font-weight: bold;">New comment :</h5>
+
+    <h3 id="comments">Comment/s ({{$story->comments->count()}})</h3>
 
     @if (session('success'))
       <div class="alert alert-success">
@@ -66,16 +86,16 @@
     <div class="row">
       <div class="comments col-md-12">
         @foreach($story->comments as $comment)
-          <div class="comment-wrap">
+          <div class="comment-wrap" id="{{$comment->id}}">
             <div class="photo">
-              <div class="avatar" style="background-image: url('http://s.gravatar.com/avatar/{{md5($comment->email)}}')"></div>
+              <div class="avatar" style="background-image: url('https://www.gravatar.com/avatar/{{md5($comment->email)}}?d=identicon')"></div>
             </div>
             <div class="comment-block">
               <p class="comment-text">
                 {!! nl2br($comment->comment) !!}
               </p>
               <div class="bottom-comment">
-                <div class="comment-date">{{$comment->created_at->diffForHumans()}}</div>
+                <div class="comment-date">Created {{$comment->created_at->diffForHumans()}} by <a href="/user/{{$comment->user->slug}}">{{$comment->user->name}}</a></div>
                 <ul class="comment-actions">
                   <li class="reply"><a href="#new-comment" data-reply-id="{{$comment->id}}">Reply</a></li>
                 </ul>

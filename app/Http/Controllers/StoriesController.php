@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoryRequest;
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 use App\Story;
 use App\Comment;
 
@@ -15,12 +16,21 @@ class StoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user = null)
     {
-        $stories = Story::with('comments')->orderBy('created_at', 'desc')->get();
+        $stories = Story::with('comments')->orderBy('created_at', 'desc');
+        if ($user) {
+            if (is_numeric($user)) {
+                $user = User::find($user);
+            } else {
+                $user = User::where('slug', '=', $user)->first();
+            }
+            $stories = $stories->where('user_id', '=', $user->id);
+        }
 
         return view('stories.index', [
-            'stories' => $stories,
+            'user' => $user,
+            'stories' => $stories->get(),
         ]);
     }
 

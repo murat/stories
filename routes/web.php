@@ -6,6 +6,10 @@ Route::get('/help', 'HomeController@help');
 
 Route::resource('stories', 'StoriesController');
 Route::resource('stories.comments', 'CommentsController');
+Route::put('/stories/{id}/upvote', 'StoriesController@upvote');
+Route::put('/stories/{id}/downvote', 'StoriesController@downvote');
+
+Route::get('/user/{user}', 'StoriesController@index');
 
 Auth::routes();
 Route::group(['prefix' => 'login'], function () {

@@ -27,9 +27,8 @@
           </a>
           <ul class="dropdown-menu">
             @if(auth()->user())
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
+              <li><a href="#">/my-stories</a></li>
+              <li><a href="#">/upvotes</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="/logout">/logout</a></li>
             @else
