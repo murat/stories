@@ -754,6 +754,53 @@ module.exports = __webpack_require__(35);
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(9);
+__webpack_require__(15);
+
+var App = {
+    vote: {
+        up: function up(event, story, user) {
+            axios.put('/stories/' + story + '/vote/up', { user: user }).then(function (res) {
+                if (res.data.status === 'success') {
+                    var vote = parseInt(res.data.data.upvote_count, 10) - parseInt(res.data.data.downvote_count, 10);
+                    var voting = $(event.target).closest('.voting');
+
+                    voting.find('.votes').text(vote);
+                    voting.find('.upvote').text('upvoted (' + parseInt(res.data.data.upvote_count, 10) + ')');
+                    voting.find('.upvote').addClass('disabled');
+                }
+            });
+        },
+        down: function down(event, story, user) {
+            axios.put('/stories/' + story + '/vote/down', { user: user }).then(function (res) {
+                if (res.data.status === 'success') {
+                    var vote = parseInt(res.data.data.upvote_count, 10) - parseInt(res.data.data.downvote_count, 10);
+                    var voting = $(event.target).closest('.voting');
+
+                    voting.find('.votes').text(vote);
+                    voting.find('.downvote').text('downvoted (' + parseInt(res.data.data.downvote_count, 10) + ')');
+                    voting.find('.downvote').addClass('disabled');
+                }
+            });
+        }
+    }
+};
+
+(function ($) {
+
+    var upvoteButton = $('.upvote');
+    upvoteButton.on('click', function (e) {
+        e.preventDefault();
+
+        App.vote.up(e, $(e.target).data('story'), $(e.target).data('user'));
+    });
+
+    var downvoteButton = $('.downvote');
+    downvoteButton.on('click', function (e) {
+        e.preventDefault();
+
+        App.vote.down(e, $(e.target).data('story'), $(e.target).data('user'));
+    });
+})(jQuery);
 
 /***/ }),
 /* 9 */

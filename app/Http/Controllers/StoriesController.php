@@ -121,4 +121,34 @@ class StoriesController extends Controller
     {
         //
     }
+
+    public function vote(Request $request, $id, $type = 'upvote')
+    {
+        $story = Story::find($id);
+        $user = User::find($request->input('user'));
+
+        try {
+            if ($type == 'upvote') {
+                $vote = \App\Vote::create(['user_id' => $user->id, 'story_id' => $story->id, 'vote_type' => 'up']);
+                $story->upvote_count += 1;
+            } else {
+                $vote = \App\Vote::create(['user_id' => $user->id, 'story_id' => $story->id, 'vote_type' => 'down']);
+                $story->downvote_count += 1;
+            }
+
+            $story->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => "You voted {$story->user->name}'s story. Thanks!",
+                'data' => $story,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => "We couldn't save your voting for {$story->user->name}'s story. Sorry!",
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
 }

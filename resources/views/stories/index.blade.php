@@ -12,7 +12,8 @@
 
           <span class="pull-right">
             <span class="label label-success">
-              ({{$story->upvote_count}} {{ $story->upvote_count > 1 ? 'upvotes' : 'upvote' }} )
+              <?php $vote = (int)$story->upvote_count - (int)$story->downvote_count; ?>
+              {{$vote}} {{ $vote > 1 ? 'votes' : 'vote' }} )
             </span>
             &nbsp;
             <span class="label label-primary">
