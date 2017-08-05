@@ -23,20 +23,28 @@
 
       <a href="#" style="pointer-events: none;" class="btn btn-default votes">{{(int)$story->upvote_count - (int)$story->downvote_count}}</a>
 
+      @if(auth()->user())
+
       <?php
-      $is_upVoted = \App\Vote::where('story_id', '=', $story->id)->where('vote_type', '=', 'up')->exists();
+      $is_upVoted = \App\Vote::where('story_id', '=', $story->id)->where('user_id', '=', auth()->user()->id)->where('vote_type', '=', 'up')->exists();
       ?>
       <a href="#upvote" class="btn btn-success {{$is_upVoted ? 'disabled' : 'upvote'}}" data-story="{{$story->id}}" data-user="{{auth()->user()->id}}">
         <span class="caret" style="transform: rotate(180deg)"></span>
         upvote ({{$story->upvote_count}})
       </a>
       <?php
-      $is_downVoted = \App\Vote::where('story_id', '=', $story->id)->where('vote_type', '=', 'down')->exists();
+      $is_downVoted = \App\Vote::where('story_id', '=', $story->id)->where('user_id', '=', auth()->user()->id)->where('vote_type', '=', 'down')->exists();
       ?>
       <a href="#downvote" class="btn btn-danger {{$is_downVoted ? 'disabled' : 'downvote'}}" data-story="{{$story->id}}" data-user="{{auth()->user()->id}}">
         <span class="caret"></span>
         downvote ({{$story->downvote_count}})
       </a>
+
+      @else
+
+        <a href="/login" class="btn btn-default">Sign in for voting</a>
+
+      @endif
 
     </div>
 
