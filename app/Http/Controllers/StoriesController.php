@@ -122,13 +122,13 @@ class StoriesController extends Controller
         //
     }
 
-    public function vote(Request $request, $id, $type = 'upvote')
+    public function vote(Request $request, $id, $type = 'up')
     {
         $story = Story::find($id);
         $user = User::find($request->input('user'));
 
         try {
-            if ($type == 'upvote') {
+            if ($type == 'up') {
                 $vote = \App\Vote::create(['user_id' => $user->id, 'story_id' => $story->id, 'vote_type' => 'up']);
                 $story->upvote_count += 1;
             } else {
