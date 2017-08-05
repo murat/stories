@@ -8362,6 +8362,11 @@ button.close {
   min-height: 85px;
 }
 
+.comments .comment-wrap.reply {
+  margin-left: 86px;
+  width: calc(100% - 86px);
+}
+
 .comments .photo {
   display: table-cell;
   width: 86px;

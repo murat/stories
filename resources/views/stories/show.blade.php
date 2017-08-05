@@ -69,7 +69,7 @@
         <div class="comment-wrap">
           <div class="comment-block">
 
-            <form action="/stories/{{$story->slug}}/comments" method="post" class="ajax-form form-horizontal">
+            <form action="/stories/{{$story->slug}}/comments" method="post" class="form-horizontal">
               {{csrf_field()}}
               <input type="hidden" name="story_id" value="{{$story->id}}">
 
@@ -99,24 +99,11 @@
 
     <div class="row">
       <div class="comments col-md-12">
-        @foreach($story->comments as $comment)
-          <div class="comment-wrap" id="{{$comment->id}}">
-            <div class="photo">
-              <div class="avatar" style="background-image: url('https://www.gravatar.com/avatar/{{md5($comment->email)}}?d=identicon')"></div>
-            </div>
-            <div class="comment-block">
-              <p class="comment-text">
-                {!! nl2br($comment->comment) !!}
-              </p>
-              <div class="bottom-comment">
-                <div class="comment-date">Created {{$comment->created_at->diffForHumans()}} by <a href="/user/{{$comment->user->slug}}">{{$comment->user->name}}</a></div>
-                <ul class="comment-actions">
-                  <li class="reply"><a href="#new-comment" data-reply-id="{{$comment->id}}">Reply</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        @endforeach
+        @each('comments.comment', $story->comments()->whereRaw('reply_id is null')->get(), 'comment')
+
+        {{-- @foreach($story->comments()->whereRaw('reply_id is null')->get() as $comment)
+          @render('')
+        @endforeach --}}
       </div>
     </div>
 

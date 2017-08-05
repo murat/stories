@@ -782,6 +782,16 @@ var App = {
                 }
             });
         }
+    },
+
+    comment: {
+        replyFor: function replyFor(e, comment) {
+            var form = $('#new-comment').find('form');
+            if (form.find('input[name=reply_id]').length) {
+                form.find('input[name=reply_id]').remove();
+            }
+            form.prepend('<input type="hidden" name="reply_id" value="' + comment + '" />');
+        }
     }
 };
 
@@ -799,6 +809,11 @@ var App = {
         e.preventDefault();
 
         App.vote.down(e, $(e.target).data('story'), $(e.target).data('user'));
+    });
+
+    var replyButton = $('.reply[data-reply-id]');
+    replyButton.on('click', function (e) {
+        App.comment.replyFor(e, $(e.target).data('reply-id'));
     });
 })(jQuery);
 

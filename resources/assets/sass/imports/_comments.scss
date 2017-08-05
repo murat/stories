@@ -7,6 +7,11 @@
     display: table;
     width: 100%;
     min-height: 85px;
+
+    &.reply {
+        margin-left: 86px;
+        width: calc(100% - 86px);
+    }
   }
 
   .photo {
