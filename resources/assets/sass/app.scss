@@ -1,12 +1,17 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&subset=latin-ext');
 
 // Variables
 @import "variables";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/font-awesome/css/font-awesome";
 
+@import "node_modules/quill/dist/quill.bubble";
+@import "node_modules/quill/dist/quill.core";
+
+@import "imports/article";
 @import "imports/comments";
 @import "imports/footer";
 
@@ -22,7 +27,106 @@ body > .container {
     padding: 60px 15px 0;
 }
 
-.info {
-    padding: 1em 0;
-    font-style: italic;
+*:focus {
+  outline: none;
+}
+
+a:not(.btn) {
+    &:link,
+    &:visited,
+    &:focus {
+        color: $brand-primary;
+        text-decoration: none;
+    }
+    &:hover {
+        color: darken($brand-primary, 15%);
+    }
+}
+.dropdown-menu li a:link,
+.dropdown-menu li a:visited {
+    color: $text-color;
+}
+
+.form-control {
+  box-shadow: none;
+}
+.form-control:focus {
+  border-color: lighten($brand-primary, 40%);
+  outline: none;
+  box-shadow: none;
+}
+.form-control.ql-container {
+  padding: 0;
+  min-height: 400px;
+}
+
+label {
+  font-weight: normal;
+}
+
+input[type=checkbox] {
+  opacity: 0;
+  float:left;
+}
+
+input[type=checkbox] + label {
+  margin: 0 0 0 5px;
+  position: relative;
+}
+
+input[type=checkbox] + label ~ label {
+  margin: 0;
+}
+
+input[type=checkbox] + label::before {
+  content: ' ';
+  position: absolute;
+  left: -25px;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  display: block;
+  background: white;
+  border: 1px solid lighten($brand-primary, 40%);
+}
+
+input[type=checkbox] + label::after {
+  content: '✓';
+  position: absolute;
+  left: -23px;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  display: block;
+  z-index: 1;
+  transition: all .3s ease;
+  transform: scale(0);
+  opacity: 0;
+}
+
+input[type=checkbox]:checked + label::after {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.btn-github, .btn-github:hover,
+.btn-facebook, .btn-facebook:hover,
+.btn-twitter, .btn-twitter:hover {
+  color: #fff;
+  .fa {
+    position: relative;
+    margin-right: .5em;
+  }
+}
+.btn-github, .btn-github:hover {
+  background: #323232;
+  border-color: #323232;
+}
+.btn-facebook, .btn-facebook:hover {
+  background: #3b5998;
+  border-color: #3b5998;
+}
+.btn-twitter, .btn-twitter:hover {
+  background: #00aced;
+  border-color: #00aced;
 }

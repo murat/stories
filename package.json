@@ -17,6 +17,8 @@
     "lodash": "^4.17.4"
   },
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.16.2",
+    "font-awesome": "^4.7.0",
+    "quill": "^1.3.0"
   }
 }

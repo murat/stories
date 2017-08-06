@@ -9,6 +9,7 @@ Route::resource('stories.comments', 'CommentsController');
 Route::put('/stories/{id}/vote/{type}', 'StoriesController@vote');
 
 Route::get('/user/{user}', 'StoriesController@index');
+Route::get('/user/{user}/{votes}', 'StoriesController@index');
 
 Auth::routes();
 Route::group(['prefix' => 'login'], function () {

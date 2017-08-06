@@ -62,7 +62,7 @@ class LoginController extends Controller
         $user = Socialite::driver($provider)->user();
 
         $login = User::where('provider', '=', $provider)
-                     ->where('provider_uid', '=', $user->id);
+                        ->where('provider_uid', '=', $user->id);
 
         if ($login->exists()) {
             $login = $login->first();
@@ -73,7 +73,11 @@ class LoginController extends Controller
             $login->password = Hash::make(rand());
             $login->provider = $provider;
             $login->provider_uid = $user->id;
-            $login->save();
+            try {
+                $login->save();
+            } catch (\Exception $e) {
+                return redirect('/login')->with('error', "This e-mail address already exist!");
+            }
         }
 
         if (Auth::login($login)) {
