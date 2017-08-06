@@ -13,16 +13,20 @@ class AddSlugsToUsersAndStories extends Migration
      */
     public function up()
     {
-        Schema::table('stories', function (Blueprint $table) {
-            $table->string('slug', 128)->after('id')
-                ->nullable()
-                ->unique();
-        });
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('slug', 128)->after('id')
-                ->nullable()
-                ->unique();
-        });
+        Schema::table(
+            'stories', function (Blueprint $table) {
+                $table->string('slug', 128)->after('id')
+                    ->nullable()
+                    ->unique();
+            }
+        );
+        Schema::table(
+            'users', function (Blueprint $table) {
+                $table->string('slug', 128)->after('id')
+                    ->nullable()
+                    ->unique();
+            }
+        );
     }
 
     /**
@@ -32,11 +36,15 @@ class AddSlugsToUsersAndStories extends Migration
      */
     public function down()
     {
-        Schema::table('stories', function(Blueprint $table) {
-            $table->dropColumn('slug');
-        });
-        Schema::table('users', function(Blueprint $table) {
-            $table->dropColumn('slug');
-        });
+        Schema::table(
+            'stories', function (Blueprint $table) {
+                $table->dropColumn('slug');
+            }
+        );
+        Schema::table(
+            'users', function (Blueprint $table) {
+                $table->dropColumn('slug');
+            }
+        );
     }
 }

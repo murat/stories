@@ -13,10 +13,12 @@ class AddSocialiteProvidersToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('provider')->nullable()->default(null);
-            $table->string('provider_uid')->nullable()->default(null);
-        });
+        Schema::table(
+            'users', function (Blueprint $table) {
+                $table->string('provider')->nullable()->default(null);
+                $table->string('provider_uid')->nullable()->default(null);
+            }
+        );
     }
 
     /**
@@ -26,8 +28,10 @@ class AddSocialiteProvidersToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['provider', 'provider_uid']);
-        });
+        Schema::table(
+            'users', function (Blueprint $table) {
+                $table->dropColumn(['provider', 'provider_uid']);
+            }
+        );
     }
 }

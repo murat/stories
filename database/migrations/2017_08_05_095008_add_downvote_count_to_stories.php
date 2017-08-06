@@ -13,9 +13,11 @@ class AddDownvoteCountToStories extends Migration
      */
     public function up()
     {
-        Schema::table('stories', function (Blueprint $table) {
-            $table->integer('downvote_count')->default(0)->after('upvote_count');
-        });
+        Schema::table(
+            'stories', function (Blueprint $table) {
+                $table->integer('downvote_count')->default(0)->after('upvote_count');
+            }
+        );
     }
 
     /**
@@ -25,8 +27,10 @@ class AddDownvoteCountToStories extends Migration
      */
     public function down()
     {
-        Schema::table('stories', function (Blueprint $table) {
-            $table->dropColumn('downvote_count');
-        });
+        Schema::table(
+            'stories', function (Blueprint $table) {
+                $table->dropColumn('downvote_count');
+            }
+        );
     }
 }

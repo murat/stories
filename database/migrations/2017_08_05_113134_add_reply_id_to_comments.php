@@ -13,15 +13,17 @@ class AddReplyIdToComments extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->integer('reply_id')->unsigned()
+        Schema::table(
+            'comments', function (Blueprint $table) {
+                $table->integer('reply_id')->unsigned()
                     ->after('id')
                     ->nullable()
                     ->default(null);
 
-            $table->foreign('reply_id')->after('id')
-                  ->references('id')->on('comments');
-        });
+                $table->foreign('reply_id')->after('id')
+                    ->references('id')->on('comments');
+            }
+        );
     }
 
     /**
@@ -31,8 +33,10 @@ class AddReplyIdToComments extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('reply_id');
-        });
+        Schema::table(
+            'comments', function (Blueprint $table) {
+                $table->dropColumn('reply_id');
+            }
+        );
     }
 }

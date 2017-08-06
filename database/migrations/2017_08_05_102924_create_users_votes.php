@@ -13,20 +13,22 @@ class CreateUsersVotes extends Migration
      */
     public function up()
     {
-        Schema::create('users_votes', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create(
+            'users_votes', function (Blueprint $table) {
+                $table->increments('id');
 
-            $table->integer('user_id')->unsigned();
-            $table->integer('story_id')->unsigned();
-            $table->string('vote_type', 4);
+                $table->integer('user_id')->unsigned();
+                $table->integer('story_id')->unsigned();
+                $table->string('vote_type', 4);
 
-            $table->timestamps();
+                $table->timestamps();
 
-            $table->foreign('user_id')->after('id')
-                  ->references('id')->on('users');
-            $table->foreign('story_id')->after('id')
-                  ->references('id')->on('stories');
-        });
+                $table->foreign('user_id')->after('id')
+                    ->references('id')->on('users');
+                $table->foreign('story_id')->after('id')
+                    ->references('id')->on('stories');
+            }
+        );
     }
 
     /**

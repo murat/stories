@@ -27,12 +27,16 @@ class StoriesController extends Controller
 
             if ($votes) {
                 $stories = [];
-                foreach($user->votes as $key => $story) {
+                foreach ($user->votes as $key => $story) {
                     $stories[] = $story->story;
                 };
                 $stories = collect($stories);
             } else {
-                $stories = $user->stories->map(function ($item, $key) { return $item; });
+                $stories = $user->stories->map(
+                    function ($item, $key) {
+                        return $item;
+                    }
+                );
             }
         } else {
             $stories = Story::with('comments')->orderBy('created_at', 'desc')->get();

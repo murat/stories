@@ -13,17 +13,19 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create(
+            'comments', function (Blueprint $table) {
+                $table->increments('id');
 
-            $table->integer('story_id')->unsigned();
-            $table->string('email');
-            $table->text('comment')->nullable()->default(null);
+                $table->integer('story_id')->unsigned();
+                $table->string('email');
+                $table->text('comment')->nullable()->default(null);
 
-            $table->timestamps();
+                $table->timestamps();
 
-            $table->foreign('story_id')->references('id')->on('stories');
-        });
+                $table->foreign('story_id')->references('id')->on('stories');
+            }
+        );
     }
 
     /**
