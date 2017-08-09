@@ -179,6 +179,9 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        // Custom package
+        Muratbsts\MailTemplate\Providers\MailTemplateServiceProvider::class,
+
     ],
 
     /*
@@ -229,6 +232,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        // Custom package
+        // 'MailTemplates' => Muratbsts\MailTemplate\Providers\MailTemplateServiceProvider::class,
 
     ],
 

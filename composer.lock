@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fae5c2139d49b650d580ee0e4b2806fe",
+    "content-hash": "d677d18dc8008bb5a4f16320f1d781eb",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -937,6 +937,47 @@
                 "schedule"
             ],
             "time": "2017-01-23T04:29:33+00:00"
+        },
+        {
+            "name": "muratbsts/mail-template",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/muratbsts/mail-template.git",
+                "reference": "a49116595973fe1e634672b95fc084b035958527"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/muratbsts/mail-template/zipball/a49116595973fe1e634672b95fc084b035958527",
+                "reference": "a49116595973fe1e634672b95fc084b035958527",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Muratbsts\\MailTemplate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Murat Bastas",
+                    "email": "muratbsts@gmail.com"
+                }
+            ],
+            "description": "A mail template collection for Laravel 5.x",
+            "keywords": [
+                "laravel",
+                "mail",
+                "template"
+            ],
+            "time": "2017-08-09 22:09:43"
         },
         {
             "name": "nesbot/carbon",
@@ -3767,7 +3808,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "muratbsts/mail-template": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
