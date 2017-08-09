@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Muratbsts\MailTemplate\MailTemplate as MailTemplate;
 use \App\Story;
 use \App\Comment;
 
@@ -48,6 +49,19 @@ class CommentsController extends Controller
             $comment = Comment::create($data);
 
             $story->comments()->save($comment);
+
+            if ($story->has('user')) {
+
+                $mailer = app()->make(MailTemplate::class);
+
+                $mailer->send('emails.notification', [
+                    'story' => $story,
+                    'comment' => $comment
+                ], function ($message) use ($story) {
+                    $message->to($story->user->email, $story->user->name)->subject('You have a new notification!');
+                });
+
+            }
 
             return redirect('/stories/' . $story->slug)
                     ->with('success', 'Comment created!');

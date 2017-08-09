@@ -233,9 +233,6 @@ return [
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
-        // Custom package
-        // 'MailTemplates' => Muratbsts\MailTemplate\Providers\MailTemplateServiceProvider::class,
-
     ],
 
 ];
