@@ -11,10 +11,11 @@
             <a class="navbar-brand" href="#">Stories</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="/">/home</a></li>
                 <li><a href="/help">/help</a></li>
             </ul>
+            <!--
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/stories/create">/new story</a></li>
                 <li class="dropdown">
@@ -37,6 +38,7 @@
                     </ul>
                 </li>
             </ul>
+            -->
         </div><!--/.nav-collapse -->
     </div>
 </nav>

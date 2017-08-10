@@ -2,6 +2,9 @@
 
 @section('content')
   <div class="container">
+    <div class="back-cont">
+      <a href="javascript: window.history.back();;" class="goback"><i class="fa fa-arrow-left"></i>Go Back</a>
+    </div>
     <article class="story">
       <header>
         <h3>
@@ -25,9 +28,9 @@
       </div>
 
       <footer>
-        <div class="btn-group voting">
+        <div class="voting">
 
-          <a href="#" style="pointer-events: none;" class="btn btn-default votes">{{(int)$story->upvote_count - (int)$story->downvote_count}}</a>
+          <a href="#" style="pointer-events: none;" class="btn votes"><i class="fa fa-cube"></i><span>{{(int)$story->upvote_count - (int)$story->downvote_count}}</span></a>
 
           @if(auth()->user())
 
@@ -35,15 +38,15 @@
           $is_upVoted = \App\Vote::where('story_id', '=', $story->id)->where('user_id', '=', auth()->user()->id)->where('vote_type', '=', 'up')->exists();
           ?>
           <a href="#upvote" class="btn btn-success {{$is_upVoted ? 'disabled' : 'upvote'}}" data-story="{{$story->id}}" data-user="{{auth()->user()->id}}">
-            <span class="caret" style="transform: rotate(180deg)"></span>
-            upvote ({{$story->upvote_count}})
+            <i class="fa fa-thumbs-o-up"></i>
+            <span>upvote ({{$story->upvote_count}})</span>
           </a>
           <?php
           $is_downVoted = \App\Vote::where('story_id', '=', $story->id)->where('user_id', '=', auth()->user()->id)->where('vote_type', '=', 'down')->exists();
           ?>
           <a href="#downvote" class="btn btn-danger {{$is_downVoted ? 'disabled' : 'downvote'}}" data-story="{{$story->id}}" data-user="{{auth()->user()->id}}">
-            <span class="caret"></span>
-            downvote ({{$story->downvote_count}})
+            <i class="fa fa-thumbs-o-down"></i>
+            <span>downvote ({{$story->downvote_count}})</span>
           </a>
 
           @else
