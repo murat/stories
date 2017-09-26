@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoryRequest;
+use Mockery\Exception;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Story;
-use App\Comment;
 
 class StoriesController extends Controller
 {
@@ -44,9 +43,9 @@ class StoriesController extends Controller
 
         return view(
             'stories.index', [
-            'user' => $user,
-            'votes' => $votes,
-            'stories' => $stories
+                'user' => $user,
+                'votes' => $votes,
+                'stories' => $stories
             ]
         );
     }
@@ -83,7 +82,7 @@ class StoriesController extends Controller
             return redirect("stories/{$story->slug}")->with('success', 'Story created!');
         } catch (\Exception $e) {
             return back()->with('error', 'An error occurred: ' . $e->getMessage())
-                         ->withInput();
+                ->withInput();
         }
     }
 
@@ -95,15 +94,14 @@ class StoriesController extends Controller
      */
     public function show($id)
     {
-        if (is_numeric($id)) {
-            $story = Story::find($id)->with('comments');
-        } else {
-            $story = Story::with('comments')->where('slug', '=', $id)->first();
-        }
+        $story = Story::where('id', '=', $id)
+                        ->orWhere('slug', '=', $id)
+                        ->with('comments')
+                        ->first();
 
         return view(
             'stories.show', [
-            'story' => $story,
+                'story' => $story,
             ]
         );
     }
@@ -144,15 +142,19 @@ class StoriesController extends Controller
 
     public function vote(Request $request, $id, $type = 'up')
     {
-        $story = Story::find($id);
+        $story = Story::where('id', '=', $id)
+            ->orWhere('slug', '=', $id)
+            ->with('comments')
+            ->first();
+
         $user = User::find($request->input('user'));
 
         try {
             if ($type == 'up') {
-                $vote = \App\Vote::create(['user_id' => $user->id, 'story_id' => $story->id, 'vote_type' => 'up']);
+                \App\Vote::create(['user_id' => $user->id, 'story_id' => $story->id, 'vote_type' => 'up']);
                 $story->upvote_count += 1;
             } else {
-                $vote = \App\Vote::create(['user_id' => $user->id, 'story_id' => $story->id, 'vote_type' => 'down']);
+                \App\Vote::create(['user_id' => $user->id, 'story_id' => $story->id, 'vote_type' => 'down']);
                 $story->downvote_count += 1;
             }
 
@@ -160,17 +162,45 @@ class StoriesController extends Controller
 
             return response()->json(
                 [
-                'status' => 'success',
-                'message' => "You voted {$story->user->name}'s story. Thanks!",
-                'data' => $story,
+                    'status' => 'success',
+                    'message' => "You voted {$story->title}. Thanks!",
+                    'data' => $story,
                 ]
             );
         } catch (\Exception $e) {
             return response()->json(
                 [
-                'status' => 'error',
-                'message' => "We couldn't save your voting for {$story->user->name}'s story. Sorry!",
-                'error' => $e->getMessage(),
+                    'status' => 'error',
+                    'message' => "We couldn't save your voting for {$story->title}. Sorry!",
+                    'error' => $e->getMessage(),
+                ]
+            );
+        }
+    }
+
+    public function react($id, $context)
+    {
+        $story = Story::where('id', '=', $id)
+            ->orWhere('slug', '=', $id)
+            ->with('comments')
+            ->first();
+
+        try {
+            $story->reaction($context, Auth::user() ?? null);
+
+            return response()->json(
+                [
+                    'status' => 'success',
+                    'message' => "You gave a reaction to story. Thanks!",
+                    'data' => $story,
+                ]
+            );
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => "We couldn't save your reaction for {$story->title}. Sorry!",
+                    'error' => $e->getMessage(),
                 ]
             );
         }

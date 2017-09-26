@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'template'  => 'default',
+    'template'  => 'campaign',
     'footnote'  => 'MIT © 2017&nbsp;Muratbsts',
 
     'logo'      => [

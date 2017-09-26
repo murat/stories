@@ -37,15 +37,24 @@ class CommentsController extends Controller
      */
     public function store($id, Request $request)
     {
-        if (is_numeric($id)) {
-            $story = Story::find($id);
-        } else {
-            $story = Story::where('slug', '=', $id)->first();
-        }
-
-        $data = $request->all();
+        $story = Story::where('id', '=', $id)
+            ->orWhere('slug', '=', $id)
+            ->with('comments')
+            ->first();
 
         try {
+            \Validator::make($request->all(), [
+                'email' => 'required|email',
+                'comment' => 'required',
+            ])->validate();
+
+            $data = array();
+            $data['story_id'] = $story->id;
+            $data['reply_id'] = $request->input('reply_id') ?: null;
+            $data['user_id'] = $request->input('user_id') ?: null;
+            $data['email'] = $request->input('email');
+            $data['comment'] = $request->input('comment');
+
             $comment = Comment::create($data);
 
             $story->comments()->save($comment);
@@ -63,10 +72,9 @@ class CommentsController extends Controller
 
             }
 
-            return redirect('/stories/' . $story->slug)
-                    ->with('success', 'Comment created!');
+            return redirect()->back()->with('success', 'Comment created!');
         } catch (\Exception $e) {
-            return redirect('/stories/' . $story->slug)->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Could not create comment because ' . $e->getMessage());
         }
     }
 

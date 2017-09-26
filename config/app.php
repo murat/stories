@@ -181,6 +181,7 @@ return [
 
         // Custom package
         Muratbsts\MailTemplate\Providers\MailTemplateServiceProvider::class,
+        Muratbsts\Reactable\Providers\ReactableServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
+        'Reactable' => Muratbsts\Reactable\Reactable::class,
     ],
 
 ];
