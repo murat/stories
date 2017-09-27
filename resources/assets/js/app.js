@@ -1,4 +1,5 @@
 import './bootstrap';
+import './main';
 import Quill from 'quill/dist/quill';
 import axios from 'axios';
 import _ from 'lodash';
@@ -11,9 +12,9 @@ const App = {
           const vote = parseInt(res.data.data.upvote_count, 10) - parseInt(res.data.data.downvote_count, 10);
           const voting = $(event.target).closest('.voting');
 
-          voting.find('.votes').text(vote);
-          voting.find('.upvote').text(`upvoted (${parseInt(res.data.data.upvote_count, 10)})`);
-          voting.find('.upvote').addClass('disabled');
+          voting.find('.votes span').text(vote);
+          voting.find('.upvote span').text(`upvoted (${parseInt(res.data.data.upvote_count, 10)})`);
+          voting.find('a.upvote').addClass('disabled');
         }
       });
     },
@@ -24,9 +25,9 @@ const App = {
           const vote = parseInt(res.data.data.upvote_count, 10) - parseInt(res.data.data.downvote_count, 10);
           const voting = $(event.target).closest('.voting');
 
-          voting.find('.votes').text(vote);
-          voting.find('.downvote').text(`downvoted (${parseInt(res.data.data.downvote_count, 10)})`);
-          voting.find('.downvote').addClass('disabled');
+          voting.find('.votes span').text(vote);
+          voting.find('.downvote span').text(`downvoted (${parseInt(res.data.data.downvote_count, 10)})`);
+          voting.find('a.downvote').addClass('disabled');
         }
       });
     },
@@ -64,14 +65,13 @@ const App = {
   upvoteButton.on('click', (e) => {
     e.preventDefault();
 
-    App.vote.up(e, $(e.target).data('story'), $(e.target).data('user'));
+    App.vote.up(e, $('a.upvote').data('story'), $('a.upvote').data('user'));
   });
 
-  const downvoteButton = $('.downvote');
+  const downvoteButton = $('a.downvote');
   downvoteButton.on('click', (e) => {
     e.preventDefault();
-
-    App.vote.down(e, $(e.target).data('story'), $(e.target).data('user'));
+    App.vote.down(e, $('a.downvote').data('story'), $('a.downvote').data('user'));
   });
 
   const replyButton = $('.reply[data-reply-id]');

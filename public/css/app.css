@@ -11404,7 +11404,7 @@ button.close {
 }
 
 /*!
- * Quill Editor v1.3.0
+ * Quill Editor v1.3.1
  * https://quilljs.com/
  * Copyright (c) 2014, Jason Chen
  * Copyright (c) 2013, salesforce.com
@@ -12202,14 +12202,7 @@ button.close {
 
 .ql-bubble .ql-editor code {
   font-size: 85%;
-  padding-bottom: 2px;
-  padding-top: 2px;
-}
-
-.ql-bubble .ql-editor code:before,
-.ql-bubble .ql-editor code:after {
-  content: "\A0";
-  letter-spacing: -2px;
+  padding: 2px 4px;
 }
 
 .ql-bubble .ql-editor pre.ql-syntax {
@@ -12601,7 +12594,7 @@ button.close {
 }
 
 /*!
- * Quill Editor v1.3.0
+ * Quill Editor v1.3.1
  * https://quilljs.com/
  * Copyright (c) 2014, Jason Chen
  * Copyright (c) 2013, salesforce.com
@@ -13221,6 +13214,183 @@ article.story .info {
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
+}
+
+/* @todo::list group item editation */
+
+.list-group-item {
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.right-side {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  float: left;
+  background: #fff;
+  padding: 10px 15px;
+  list-style: none;
+}
+
+.right-side li.right-side-item {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.right-side li.right-side-item a {
+  padding: 7px 0;
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+}
+
+.right-side li.right-side-item a i {
+  margin-right: 5px;
+}
+
+.margin-up-nav {
+  margin-top: 60px;
+}
+
+.back-cont {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.back-cont .goback {
+  padding: 7px;
+  background-color: #fff;
+  position: relative;
+  float: left;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  margin-left: 0;
+  border-top-left-radius: 38px;
+  border-bottom-left-radius: 38px;
+}
+
+.back-cont .goback i {
+  margin-right: 5px;
+}
+
+.back-cont .goback:hover {
+  margin-left: -3px;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(33, 106, 148, 0.05);
+          box-shadow: 3px 3px 5px 0px rgba(33, 106, 148, 0.05);
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+.btn-success,
+.btn-danger {
+  background: transparent !important;
+  border: none !important;
+}
+
+.btn-success:hover,
+.btn-danger:hover {
+  background: transparent !important;
+}
+
+.votes {
+  padding: 0 !important;
+}
+
+.votes i {
+  width: auto;
+  height: auto;
+  position: relative;
+  float: left;
+  margin-right: 5px;
+  line-height: 27px;
+  font-size: 18px;
+}
+
+.votes span {
+  width: auto;
+  height: auto;
+  position: relative;
+  float: left;
+  display: block;
+  background: #fff;
+  padding: 3px 7px;
+  border-radius: 3px !important;
+}
+
+.voteSet,
+a[href="#upvote"],
+a[href="#downvote"] {
+  padding: 0 !important;
+  cursor: pointer;
+  color: #216a94 !important;
+}
+
+.voteSet i.fa,
+a[href="#upvote"] i.fa,
+a[href="#downvote"] i.fa {
+  width: auto;
+  height: auto;
+  position: relative;
+  float: left;
+  margin-right: 5px;
+  line-height: 27px;
+  font-size: 18px;
+}
+
+.voteSet span,
+a[href="#upvote"] span,
+a[href="#downvote"] span {
+  width: auto;
+  height: auto;
+  position: relative;
+  float: left;
+  display: block;
+  background: #fff;
+  padding: 3px 7px;
+  border-radius: 3px !important;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+a[href="#upvote"] span b {
+  color: #33cc77;
+}
+
+a[href="#upvote"]:hover {
+  color: #00aced;
+}
+
+a[href="#upvote"]:hover span {
+  background: #3c763d;
+  color: #fff !important;
+}
+
+a[href="#downvote"] span b {
+  color: #f30e73;
+}
+
+a[href="#downvote"]:hover {
+  color: #00aced;
+}
+
+a[href="#downvote"]:hover span {
+  background: #f30;
+  color: #fff !important;
+}
+
+a[href="#downvote"]:hover span b {
+  color: #fff;
 }
 
 html {

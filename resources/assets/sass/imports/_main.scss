@@ -1,0 +1,130 @@
+/* @todo::list group item edit's */
+.list-group-item {
+  transition: all .5s ease;
+}
+//@todo:: right side bar
+.right-side {
+  width : 100%; height: 100%;
+  position: relative; float: left;
+  background: #fff;
+  padding : 10px 15px;
+  list-style : none;
+
+  li.right-side-item {
+    width: 100%; height: auto;
+    position: relative; float: left;
+    border-bottom:1px solid #e3e3e3;
+    a {
+      padding: 7px 0;
+      width: 100%; height: auto; position: relative; float: left;
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+//@todo: container-fuild margin up
+.margin-up-nav {
+  margin-top: 60px;
+}
+//@todo go back button edit
+.back-cont {
+  width: 100%; height: auto; position: relative; float: left; display: block; margin-bottom: 10px;
+  .goback {
+    padding : 7px;
+    background-color: #fff;
+    position: relative;
+    float : left;
+    transition: all .2s ease;
+    margin-left : 0;
+    border-top-left-radius: 38px;
+    border-bottom-left-radius: 38px;
+
+    i {
+      margin-right: 5px;
+    }
+    &:hover {
+      margin-left : -3px;
+      box-shadow : 3px 3px 5px 0px rgba(33,106,148,0.05);
+    }
+  }
+}
+
+// todo:: @vote button's edit
+
+.btn {
+  margin-right: 10px;
+}
+.btn-success, .btn-danger {
+  background: transparent !important;
+  border : none !important;
+  &:hover {
+    background: transparent !important;
+  }
+}
+.votes {
+  padding: 0 !important;
+  i {
+    width : auto; height : auto; position : relative; float : left;
+    margin-right: 5px;
+    line-height: 27px;
+    font-size : 18px;
+  }
+  span{
+    width: auto;height:auto; position: relative; float: left; display: block;
+    background: #fff;
+    padding : 3px 7px;
+    border-radius : 3px !important;
+  }
+}
+// todo :: @upvote, @downvote button's edit
+.voteSet {
+  padding: 0 !important;
+  cursor : pointer;
+  color : #216a94 !important;
+  i.fa {
+    width : auto; height : auto; position : relative; float : left;
+    margin-right: 5px;
+    line-height: 27px;
+    font-size : 18px;
+  }
+  span {
+    width: auto;height:auto; position: relative; float: left; display: block;
+    background: #fff;
+    padding : 3px 7px;
+    border-radius : 3px !important;
+    transition: all .5s ease;
+  }
+
+}
+a[href="#upvote"]{
+  @extend .voteSet;
+  span b {
+    color : #33cc77;
+  }
+  &:hover {
+    color : #00aced;
+    span {
+      background : #3c763d;
+      color : #fff !important;
+    }
+  }
+}
+
+a[href="#downvote"]{
+  @extend .voteSet;
+  span b {
+    color : #f30e73;
+  }
+  &:hover {
+    color : #00aced;
+    span {
+      background : #f30;
+      color : #fff !important;
+      b {
+        color : #fff;
+      }
+    }
+  }
+}
