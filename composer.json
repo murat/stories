@@ -16,12 +16,6 @@
     "muratbsts/mail-template": "dev-master",
     "spatie/laravel-sluggable": "^1.5"
   },
-  "repositories": [
-    {
-      "type": "path",
-      "url": "/Users/murat/sites/open/laravel-reactable"
-    }
-  ],
   "require-dev": {
     "fzaninotto/faker": "~1.4",
     "mockery/mockery": "0.9.*",
