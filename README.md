@@ -10,6 +10,7 @@ Look at the [trello board](https://trello.com/b/SOpyHA6t/stories) before you [fo
 
 ```shell
 $ git clone git@github.com:USERNAME/stories && cd stories
+$ cp .env.example .env # and set up your environment
 $ composer install
 $ yarn install # or npm install
 ```
@@ -37,7 +38,6 @@ Create a new pull request.
 ## Contributors
 
 - [Murat Bastas](https://github.com/muratbsts)
-- [Taner Tombas](https://github.com/tanertombas)
 
 ## License
 
