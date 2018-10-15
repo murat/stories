@@ -2,7 +2,7 @@
 
 [![https://travis-ci.org/muratbsts/stories.svg?branch=master](https://travis-ci.org/muratbsts/stories.svg?branch=master)](https://travis-ci.org/muratbsts/stories)
 
-Story sharing platform made with Laravel 5.4
+Story sharing platform made with Laravel 5.7
 
 ## How to contribute
 
@@ -13,6 +13,7 @@ $ git clone git@github.com:USERNAME/stories && cd stories
 $ cp .env.example .env # and set up your environment
 $ composer install
 $ yarn install # or npm install
+$ php artisan key:generate
 ```
 
 Check the `.env` file and update database and social service variables.
@@ -33,7 +34,7 @@ Push `git push origin great-feature`.
 
 Create a new pull request.
 
-**Note: Dockerfile is will be soon.**
+**Note: A Dockerfile is will come soon.**
 
 ## Contributors
 
