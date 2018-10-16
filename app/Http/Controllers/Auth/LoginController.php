@@ -86,13 +86,4 @@ class LoginController extends Controller
             return redirect('/login')->with('error', "An error occurred!");
         }
     }
-
-    public function logout()
-    {
-        if (Auth::check()) {
-            Auth::logout();
-
-            return redirect('/');
-        }
-    }
 }
