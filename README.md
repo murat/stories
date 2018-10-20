@@ -34,7 +34,23 @@ Push `git push origin great-feature`.
 
 Create a new pull request.
 
-**Note: A Dockerfile is will come soon.**
+### docker
+
+This project uses phpdocker.io to run with docker:
+
+
+```bash
+$ docker-compose build
+$ docker-compose up -d
+$ docker-compose exec <container-name> bash
+$ docker-compose stop
+```
+Containers:
+
+* mysql
+* php-fpm
+
+
 
 ## Contributors
 
